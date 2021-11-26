@@ -10,8 +10,8 @@ import com.zvonimirplivelic.taskly.db.model.Task
 @Dao
 interface TasklyDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addTask(task: Task)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addTask(task: Task)
 
     @Query("SELECT * FROM task_table ORDER BY taskId ASC")
     fun getAllTasks(): LiveData<List<Task>>

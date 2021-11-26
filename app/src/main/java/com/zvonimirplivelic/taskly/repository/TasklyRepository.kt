@@ -1,4 +1,4 @@
-package com.zvonimirplivelic.taskly
+package com.zvonimirplivelic.taskly.repository
 
 import androidx.lifecycle.LiveData
 import com.zvonimirplivelic.taskly.db.dao.TasklyDao
