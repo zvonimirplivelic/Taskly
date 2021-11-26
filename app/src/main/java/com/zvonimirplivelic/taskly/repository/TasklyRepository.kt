@@ -10,4 +10,8 @@ class TasklyRepository(private val tasklyDao: TasklyDao) {
     suspend fun addTask(task: Task) {
         tasklyDao.addTask(task)
     }
+
+    suspend fun updateTask(task: Task) {
+        tasklyDao.updateTask(task)
+    }
 }
