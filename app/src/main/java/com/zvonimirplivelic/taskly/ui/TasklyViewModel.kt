@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TasklyViewModel(application: Application) : AndroidViewModel(application) {
-    private val getAllTasks: LiveData<List<Task>>
+    val getAllTasks: LiveData<List<Task>>
     private val repository: TasklyRepository
 
     init {

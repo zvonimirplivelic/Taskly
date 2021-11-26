@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.UpdateTaskFragment">
+
+    <EditText
+        android:id="@+id/et_update_task_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task name:"
+        app:layout_constraintBottom_toTopOf="@id/et_update_task_details"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_update_task_details"
+        android:hint="Task information:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_update_task_name" />
+
+    <TextView
+        android:id="@+id/tv_update_priority_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select priority"
+        app:layout_constraintBottom_toTopOf="@id/np_update_priority"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_update_task_details" />
+
+    <NumberPicker
+        android:id="@+id/np_update_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_update_priority_title" />
+
+    <Button
+        android:id="@+id/btn_update_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update task"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
