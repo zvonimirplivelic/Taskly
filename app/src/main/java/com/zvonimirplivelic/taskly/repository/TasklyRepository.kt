@@ -14,4 +14,12 @@ class TasklyRepository(private val tasklyDao: TasklyDao) {
     suspend fun updateTask(task: Task) {
         tasklyDao.updateTask(task)
     }
+
+    suspend fun deleteTask(task: Task) {
+        tasklyDao.deleteTask(task)
+    }
+
+    suspend fun deleteAllTasks() {
+        tasklyDao.deleteAllTasks()
+    }
 }

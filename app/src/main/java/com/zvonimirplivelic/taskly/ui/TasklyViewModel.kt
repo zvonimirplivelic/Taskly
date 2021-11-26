@@ -20,7 +20,7 @@ class TasklyViewModel(application: Application) : AndroidViewModel(application) 
         getAllTasks = repository.getAllTasks
     }
 
-    fun addTask(task: Task){
+    fun addTask(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTask(task)
         }
@@ -29,6 +29,18 @@ class TasklyViewModel(application: Application) : AndroidViewModel(application) 
     fun updateTask(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateTask(task)
+        }
+    }
+
+    fun deleteTask(task: Task) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteTask(task)
+        }
+    }
+
+    fun deleteAllTasks() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllTasks()
         }
     }
 }

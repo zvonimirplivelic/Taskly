@@ -1,11 +1,10 @@
 package com.zvonimirplivelic.taskly.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.NumberPicker
@@ -33,6 +32,7 @@ class UpdateTaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_update_task, container, false)
+        setHasOptionsMenu(true)
 
         viewModel = ViewModelProvider(this).get(TasklyViewModel::class.java)
 
@@ -56,6 +56,41 @@ class UpdateTaskFragment : Fragment() {
         return view
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.taskly_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_delete -> deleteTask()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteTask() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.apply {
+            setTitle("Delete ${args.currentTask.taskName} task?")
+            setMessage("Do you want to delete ${args.currentTask.taskName} task?")
+            setPositiveButton("Yes") { _, _ ->
+
+                viewModel.deleteTask(args.currentTask)
+
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully deleted ${args.currentTask.taskName}",
+                    Toast.LENGTH_LONG
+                ).show()
+
+                findNavController().navigate(R.id.action_updateTaskFragment_to_taskListFragment)
+            }
+            setNegativeButton("No") { _, _ ->
+
+            }
+            create().show()
+        }
+    }
+
     private fun updateTask() {
         val taskName = etUpdateTaskName.text.toString()
         val taskDetails = etUpdateTaskDetails.text.toString()
@@ -67,7 +102,8 @@ class UpdateTaskFragment : Fragment() {
             Toast.makeText(requireContext(), "Successfully updated task", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_updateTaskFragment_to_taskListFragment)
         } else {
-            Toast.makeText(requireContext(), "Please fill out the fields!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Please fill out the fields!", Toast.LENGTH_LONG)
+                .show()
         }
     }
 

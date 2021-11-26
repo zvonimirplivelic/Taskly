@@ -1,10 +1,10 @@
 package com.zvonimirplivelic.taskly.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +28,7 @@ class TaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_task_list, container, false)
+        setHasOptionsMenu(true)
 
         val adapter = TaskListAdapter()
 
@@ -48,5 +49,40 @@ class TaskListFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.taskly_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_delete -> deleteAllUsers()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllUsers() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.apply {
+            setTitle("Delete all tasks?")
+            setMessage("Do you want to delete all tasks?")
+            setPositiveButton("Yes") { _, _ ->
+
+                viewModel.deleteAllTasks()
+
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully deleted all tasks",
+                    Toast.LENGTH_LONG
+                ).show()
+
+                findNavController().navigate(R.id.action_updateTaskFragment_to_taskListFragment)
+            }
+            setNegativeButton("No") { _, _ ->
+
+            }
+            create().show()
+        }
     }
 }

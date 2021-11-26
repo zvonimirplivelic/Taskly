@@ -13,6 +13,12 @@ interface TasklyDao {
     @Update
     fun updateTask(task: Task)
 
+    @Delete
+    fun deleteTask(task: Task)
+
+    @Query("DELETE FROM task_table")
+    fun deleteAllTasks()
+
     @Query("SELECT * FROM task_table ORDER BY taskId ASC")
     fun getAllTasks(): LiveData<List<Task>>
 }

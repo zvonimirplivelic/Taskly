@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/task_list_item.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/menu/taskly_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
