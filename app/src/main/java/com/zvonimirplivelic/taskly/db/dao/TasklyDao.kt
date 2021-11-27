@@ -8,16 +8,19 @@ import com.zvonimirplivelic.taskly.db.model.Task
 interface TasklyDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addTask(task: Task)
+    suspend fun addTask(task: Task)
 
     @Update
-    fun updateTask(task: Task)
+    suspend fun updateTask(task: Task)
 
     @Delete
-    fun deleteTask(task: Task)
+    suspend fun deleteTask(task: Task)
 
     @Query("DELETE FROM task_table")
     fun deleteAllTasks()
+
+    @Query("SELECT * FROM task_table WHERE taskName LIKE :taskNameSearchQuery")
+    fun searchTaskByName(taskNameSearchQuery: String): LiveData<List<Task>>
 
     @Query("SELECT * FROM task_table ORDER BY taskId ASC")
     fun getAllTasks(): LiveData<List<Task>>

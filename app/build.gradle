@@ -44,7 +44,6 @@ dependencies {
     // Timber
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
-
     // Room components
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

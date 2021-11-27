@@ -4,9 +4,8 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,11 +16,12 @@ import com.zvonimirplivelic.taskly.ui.TasklyViewModel
 import com.zvonimirplivelic.taskly.ui.adapter.TaskListAdapter
 
 
-class TaskListFragment : Fragment() {
+class TaskListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var viewModel: TasklyViewModel
     private lateinit var fabAddTask: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: TaskListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +30,7 @@ class TaskListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_task_list, container, false)
         setHasOptionsMenu(true)
 
-        val adapter = TaskListAdapter()
-
+        adapter = TaskListAdapter()
         recyclerView = view.findViewById(R.id.rv_task_list)
         fabAddTask = view.findViewById(R.id.fab_add_task)
 
@@ -52,14 +51,14 @@ class TaskListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.taskly_menu, menu)
-    }
+        inflater.inflate(R.menu.task_list_menu, menu)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_delete -> deleteAllUsers()
+        val search = menu?.findItem(R.id.action_search_task)
+        val searchView = search?.actionView as? SearchView
+        searchView?.apply {
+            isSubmitButtonEnabled = true
+            setOnQueryTextListener(this@TaskListFragment)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun deleteAllUsers() {
@@ -76,13 +75,41 @@ class TaskListFragment : Fragment() {
                     "Successfully deleted all tasks",
                     Toast.LENGTH_LONG
                 ).show()
-
-                findNavController().navigate(R.id.action_updateTaskFragment_to_taskListFragment)
             }
             setNegativeButton("No") { _, _ ->
 
             }
             create().show()
         }
+    }
+
+    private fun searchDatabase(query: String?) {
+        val searchQuery = "%$query%"
+        viewModel.searchTaskByName(searchQuery).observe(this, { taskList ->
+            taskList.let {
+                adapter.setData(it)
+            }
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_delete_task -> deleteAllUsers()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            searchDatabase(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query != null) {
+            searchDatabase(query)
+        }
+        return true
     }
 }

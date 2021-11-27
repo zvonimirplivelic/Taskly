@@ -15,6 +15,10 @@ class TasklyRepository(private val tasklyDao: TasklyDao) {
         tasklyDao.updateTask(task)
     }
 
+     fun searchTaskByName(queryString: String): LiveData<List<Task>> {
+        return tasklyDao.searchTaskByName(queryString)
+    }
+
     suspend fun deleteTask(task: Task) {
         tasklyDao.deleteTask(task)
     }

@@ -32,6 +32,10 @@ class TasklyViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun searchTaskByName(queryString: String): LiveData<List<Task>> {
+        return repository.searchTaskByName(queryString)
+    }
+
     fun deleteTask(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteTask(task)
