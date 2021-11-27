@@ -34,11 +34,11 @@ class UpdateTaskFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_update_task, container, false)
         setHasOptionsMenu(true)
 
-        viewModel = ViewModelProvider(this).get(TasklyViewModel::class.java)
+        viewModel = ViewModelProvider(this)[TasklyViewModel::class.java]
 
         etUpdateTaskName = view.findViewById(R.id.et_update_task_name)
         etUpdateTaskDetails = view.findViewById(R.id.et_update_task_details)
-        npUpdateTaskPriority = view.findViewById(R.id.np_update_priority)
+        npUpdateTaskPriority = view.findViewById(R.id.np_update_task_priority)
         btnUpdateTask = view.findViewById(R.id.btn_update_task)
 
         etUpdateTaskName.setText(args.currentTask.taskName)

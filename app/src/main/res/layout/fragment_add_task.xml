@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.AddTaskFragment">
 
     <EditText
         android:id="@+id/et_task_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:hint="Task name:"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/et_task_details"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -18,9 +20,11 @@
 
     <EditText
         android:id="@+id/et_task_details"
-        android:hint="Task information:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Task information:"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_task_name" />
@@ -29,25 +33,44 @@
         android:id="@+id/tv_priority_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="Select priority"
-        app:layout_constraintBottom_toTopOf="@id/np_priority"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/priority_container"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_task_details" />
 
-    <NumberPicker
-        android:id="@+id/np_priority"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/priority_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="64dp"
+        android:layout_marginVertical="16dp"
+        android:backgroundTint="@color/purple_200"
+        app:cardCornerRadius="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_priority_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_priority_title">
+
+        <NumberPicker
+            android:id="@+id/np_priority"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:padding="8dp" />
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btn_add_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
         android:text="Add task"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

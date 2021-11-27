@@ -32,7 +32,7 @@ class AddTaskFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add_task, container, false)
 
-        viewModel = ViewModelProvider(this).get(TasklyViewModel::class.java)
+        viewModel = ViewModelProvider(this)[TasklyViewModel::class.java]
 
         addTaskButton = view.findViewById(R.id.btn_add_task)
         etTaskName = view.findViewById(R.id.et_task_name)
