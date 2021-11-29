@@ -48,8 +48,8 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     override fun getItemCount(): Int = taskList.size
 
-    fun setData(task: List<Task>) {
-        this.taskList = task
+    fun setData(tasks: List<Task>) {
+        this.taskList = tasks
         notifyDataSetChanged()
     }
 }

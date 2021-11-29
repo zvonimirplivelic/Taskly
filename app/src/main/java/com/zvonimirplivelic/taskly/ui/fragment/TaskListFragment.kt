@@ -38,7 +38,7 @@ class TaskListFragment : Fragment(), SearchView.OnQueryTextListener {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel = ViewModelProvider(this).get(TasklyViewModel::class.java)
+        viewModel = ViewModelProvider(this)[TasklyViewModel::class.java]
         viewModel.getAllTasks.observe(viewLifecycleOwner, { taskList ->
             adapter.setData(taskList)
         })
